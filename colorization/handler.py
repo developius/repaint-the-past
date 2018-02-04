@@ -23,7 +23,10 @@ def nostdout():
     sys.stdout = save_stdout
 
 def download_file(url, save_path):
-    r = requests.get(url, stream=True)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'
+    }
+    r = requests.get(url, stream=True, headers=headers)
     with open(save_path, 'wb') as f:
         shutil.copyfileobj(r.raw, f)
 
