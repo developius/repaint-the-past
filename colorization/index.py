@@ -21,8 +21,14 @@ def read_head():
 
 if(__name__ == "__main__"):
     binary_mode = os.getenv('minio_authority') == None
+    url_mode = os.getenv('url_mode') != None
+
     if binary_mode == True:
         st = sys.stdin.read()
+
+        if url_mode:
+            st = st.strip("\\n") # fix for leading/trailing whitespace in URLs
+
         handler.handle(st)
     else:
         st = get_stdin()
